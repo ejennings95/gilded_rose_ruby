@@ -26,4 +26,18 @@ describe GildedRose do
       expect { GildedRose.new(items).update_quality() }.to change { items[0].quality }.by 0
     end
   end
+
+  context  "#Normal_items_in_SellIn_date" do
+    it "should lower the Quality by 1 each day" do
+      items = [Item.new("foo", 10, 10)]
+      GildedRose.new(items).update_quality()
+      expect { GildedRose.new(items).update_quality() }.to change { items[0].quality }.by -1
+    end
+
+    it "should lower the SellIn by 1 each day" do
+      items = [Item.new("foo", 10, 10)]
+      GildedRose.new(items).update_quality()
+      expect { GildedRose.new(items).update_quality() }.to change { items[0].sell_in }.by -1
+    end
+  end
 end
