@@ -20,7 +20,7 @@ describe GildedRose do
   end
 
   context "#Quality_of_item_0_of_normal_item" do
-    it "shoud not reduce the Quality of an item below 0" do
+    it "should not reduce the Quality of an item below 0" do
       items = [Item.new("foo", 0, 0)]
       GildedRose.new(items).update_quality()
       expect { GildedRose.new(items).update_quality() }.to change { items[0].quality }.by 0
@@ -45,6 +45,13 @@ describe GildedRose do
     it "should reduce the SellIn of an item twice as fast" do
       items = [Item.new("foo", 0, 10)]
       expect { GildedRose.new(items).update_quality() }.to change { items[0].quality }.by -2
+    end
+  end
+
+  context "#Quality_of_item_max" do
+    it "should not increase the quality of an item beyond 50" do
+      items = [Item.new("Aged Brie", 10, 50)]
+      expect { GildedRose.new(items).update_quality() }.to change { items[0].quality }.by 0
     end
   end
 end
