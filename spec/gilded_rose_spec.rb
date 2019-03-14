@@ -49,9 +49,16 @@ describe GildedRose do
   end
 
   context "#Quality_of_item_max" do
-    it "should not increase the quality of an item beyond 50" do
+    it "should not increase the Quality of an item beyond 50" do
       items = [Item.new("Aged Brie", 10, 50)]
       expect { GildedRose.new(items).update_quality() }.to change { items[0].quality }.by 0
+    end
+  end
+
+  context "#Backstage_passes" do
+    it "should increase in Quality as the SellIn date approaches" do
+      items = [Item.new("Backstage passes to a TAFKAL80ETC concert", 20, 20)]
+      expect { GildedRose.new(items).update_quality() }.to change { items[0].quality }.by 1
     end
   end
 end
