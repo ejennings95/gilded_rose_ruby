@@ -103,6 +103,11 @@ describe GildedRose do
         items = [Item.new("Aged Brie", 20, 20)]
         expect { GildedRose.new(items).update_quality() }.to change { items[0].quality }.by 1
       end
+
+      it "should increase Qualityby 2 after the SellIn has past" do
+        items = [Item.new("Aged Brie", -2, 20)]
+        expect { GildedRose.new(items).update_quality() }.to change { items[0].quality }.by 2
+      end
     end
   end
 end
