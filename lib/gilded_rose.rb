@@ -13,19 +13,13 @@ class GildedRose
           end
         end
       else
-        if item.quality < 50
-          item.quality = item.quality + 1
-          if item.name == "Backstage passes to a TAFKAL80ETC concert"
-            if item.sell_in < 11
-              if item.quality < 50
-                item.quality = item.quality + 1
-              end
-            end
-            if item.sell_in < 6
-              if item.quality < 50
-                item.quality = item.quality + 1
-              end
-            end
+        item_quality_less_than_50?(item)
+        if item.name == "Backstage passes to a TAFKAL80ETC concert"
+          if item.sell_in < 11
+            item_quality_less_than_50?(item)
+          end
+          if item.sell_in < 6
+            item_quality_less_than_50?(item)
           end
         end
       end
@@ -44,12 +38,16 @@ class GildedRose
             item.quality = item.quality - item.quality
           end
         else
-          if item.quality < 50
-            item.quality = item.quality + 1
-          end
+        item_quality_less_than_50?(item)
         end
       end
     end
+  end
+
+  private
+
+  def item_quality_less_than_50?(item)
+    item.quality += 1 if item.quality < 50
   end
 end
 
