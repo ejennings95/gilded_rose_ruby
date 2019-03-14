@@ -9,7 +9,7 @@ class GildedRose
       if item.name != "Aged Brie" and item.name != "Backstage passes to a TAFKAL80ETC concert"
         if item.quality > 0
           if item.name != "Sulfuras, Hand of Ragnaros"
-            item.quality = item.quality - 1
+            reduce_quality_by_1(item)
           end
         end
       else
@@ -31,7 +31,7 @@ class GildedRose
           if item.name != "Backstage passes to a TAFKAL80ETC concert"
             if item.quality > 0
               if item.name != "Sulfuras, Hand of Ragnaros"
-                item.quality = item.quality - 1
+                reduce_quality_by_1(item)
               end
             end
           else
@@ -48,6 +48,10 @@ class GildedRose
 
   def item_quality_less_than_50?(item)
     item.quality += 1 if item.quality < 50
+  end
+
+  def reduce_quality_by_1(item)
+    item.quality -= 1
   end
 end
 
