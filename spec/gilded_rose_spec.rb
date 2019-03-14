@@ -19,15 +19,15 @@ describe GildedRose do
     end
   end
 
-  context "#Quality_of_item_0" do
-    it "shoud not reduce the quality of an item below 0" do
+  context "#Quality_of_item_0_of_normal_item" do
+    it "shoud not reduce the Quality of an item below 0" do
       items = [Item.new("foo", 0, 0)]
       GildedRose.new(items).update_quality()
       expect { GildedRose.new(items).update_quality() }.to change { items[0].quality }.by 0
     end
   end
 
-  context  "#Normal_items_in_SellIn_date" do
+  context "#Normal_items_in_SellIn_date" do
     it "should lower the Quality by 1 each day" do
       items = [Item.new("foo", 10, 10)]
       GildedRose.new(items).update_quality()
@@ -38,6 +38,13 @@ describe GildedRose do
       items = [Item.new("foo", 10, 10)]
       GildedRose.new(items).update_quality()
       expect { GildedRose.new(items).update_quality() }.to change { items[0].sell_in }.by -1
+    end
+  end
+
+  context "#SellIn_of_item_0_normal_item" do
+    it "should reduce the SellIn of an item twice as fast" do
+      items = [Item.new("foo", 0, 10)]
+      expect { GildedRose.new(items).update_quality() }.to change { items[0].quality }.by -2
     end
   end
 end
