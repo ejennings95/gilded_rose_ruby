@@ -60,5 +60,14 @@ describe GildedRose do
       items = [Item.new("Backstage passes to a TAFKAL80ETC concert", 20, 20)]
       expect { GildedRose.new(items).update_quality() }.to change { items[0].quality }.by 1
     end
+
+    it "should increase in Quality by 2 as the SellIn date is between 6 and 10 inclusive" do
+      items = [Item.new("Backstage passes to a TAFKAL80ETC concert", 10, 20)]
+      expect { GildedRose.new(items).update_quality() }.to change { items[0].quality }.by 2
+      GildedRose.new(items).update_quality()
+      GildedRose.new(items).update_quality()
+      GildedRose.new(items).update_quality()
+      expect { GildedRose.new(items).update_quality() }.to change { items[0].quality }.by 2
+    end
   end
 end
